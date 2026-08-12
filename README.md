@@ -11,3 +11,22 @@ Required libraries:
 pip install matplotlib
 pip install numpy
 pip install multiprocess
+
+# Basic usage
+
+The generation of cc-AFM images happens in two steps: First, the script extract_isosurface_parallel.py extracts a height profile from the charge density dependent
+ on a provided iso value -- the profile essentially follows this iso surface. A higher iso value corresponds to a higher STM tunnel current. The provided density 
+has to be in the xcrysden format (.xsf). The basic usage of this script is
+
+python extract_isosurface_parallel.py <density.xsf> <output_file> <iso_value>
+
+In a second step, the frequency shifts are collected according to the height profile. This occurs in the script Afm_at_Isosurface.py. This script takes the freque
+ncy shifts at different heights calculated by the ppafm program (also in xsf format), and interpolates the frequency at the height according to the height profile
+. The basic usage of this script is
+
+python Afm_at_Isosurface.py <Frequency_shifts.xsf> <height_profile> <output_file.png>
+
+The whole workflow and a more avanced example are given in the wiki.
+
+# Citation
+This code is free to use and free to modify. However, we appreaciate the citation of the paper, where this code has been introduced:
