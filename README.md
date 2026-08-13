@@ -19,6 +19,8 @@ pip install numpy
 pip install multiprocess
 ```
 
+Additionally the programs for the probe-particle model are required, which can be found here: https://github.com/Probe-Particle/ppafm
+
 # Basic usage
 
 The generation of cc-AFM images happens in two steps: First, the script extract_isosurface_parallel.py extracts a height profile from the charge density dependent
