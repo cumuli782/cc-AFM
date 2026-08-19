@@ -22,4 +22,21 @@ First, the 3D stack of constant height AFM images has to be calculated using the
 ## 1c) Doing the calculations
 For the force field calculation the usage of the full density model is assumed, the file names are assumed to be CHG_tip.xsf for the tip density and LOCPOT.xsf for the electrostatic potential. For other models, refer to the ppafm wiki. 
 Generate forcefields:
+```
+ppafm-conv-rho -s CHG.xsf -t CHG_tip.xsf -A 1.0 -B 1.1
+ppafm-generate-dftd3 -i CHG.xsf --df_name PBE
+ppafm-generate-elff -i LOCPOT.xsf -t dz2
+```
+Replace the chosen Beta (here 1.1), the chosen DFT functional (here PBE) and the tip model (here dz2) to your needs. The Amplitude for the Pauli forces are changed in the next step.
 
+Relax probe particle:
+```
+ppafm-relaxed-scan --noLJ -A 18.0
+```
+Here the Amplitude of the Pauli forces can be changed to your needs.
+
+Calculate the frequency shifts:
+```
+ppafm-plot-results --save_df
+```
+This saves the frequency shifts as a single xsf file. Though it is not neccessary for the next steps, one can also add the option "--df" to save the frequency shifts as png images in order to check the calculation.
