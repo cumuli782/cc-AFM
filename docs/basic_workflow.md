@@ -40,3 +40,10 @@ Calculate the frequency shifts:
 ppafm-plot-results --save_df
 ```
 This saves the frequency shifts as a single xsf file. Though it is not neccessary for the next steps, one can also add the option "--df" to save the frequency shifts as png images in order to check the calculation.
+
+# Step 2: (effective) isosurface calculation
+Now the isosurface has to be calculated. This workflow covers only the pure isosurface, in order to include the probe-particle deflections and the probe-tip interaction refer to the advanced example. The isosurface corresponds to a surface of constant electronic density, which translates (in the Tersoff-Hamann approximation) to a constant tunnel current. This is done in the script "extract_isosurface_height_map_parallel.py"
+```
+python extract_isosurface_height_map_parallel.py CHG.xsf output.txt 0.00001
+```
+output.txt is the name of the output file, the last value is the isovalue. Depending on the program used to generate and extract the density, it can have different units (for example charge/cellvolume, charge/A^3, charge/cell). In the case of charge/cell, the isovalue is typicall in the range of 10^-4 to 10^-6.
