@@ -31,7 +31,7 @@ python extract_isosurface_parallel.py <density.xsf> <output_file> <iso_value>
 ```
 
 In a second step, the frequency shifts are collected according to the height profile. This occurs in the script Afm_at_Isosurface.py. This script takes the freque
-ncy shifts at different heights calculated by the ppafm program (also in xsf format), and interpolates the frequency at the height according to the height profile
+ncy shifts at different heights, which have to be calculated first by the ppafm program (also in xsf format), and interpolates the frequency at the height according to the height profile
 . The basic usage of this script is
 ```
 python Afm_at_Isosurface.py <Frequency_shifts.xsf> <height_profile> <output_file.png>
