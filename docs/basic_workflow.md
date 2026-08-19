@@ -4,7 +4,7 @@ This workflow shows the general calculation of cc-AFM images. It results in a si
 
 In order to calculate cc-AFM images the electronic density (and if applicable the partial electronic density) of the system is needed. This density has to be in the xsf format and on a surface-cell grid: 
 The first two grid vectors have to be parallel to the xy plane (surface), the third one has to be parallel to the z axis (perpendicular to the surface). For this workflow it will be assumed that the charge density file
-has the name CHG.xsf. Also some familiarity with the ppafm program package is assumed. 
+has the name CHG.xsf. Also some familiarity with the ppafm program package is assumed. Note: The ppafm programs are parallelized with OpenMp, the program extract_isosurface_height_map_parallel.py is parallelized using the multiprocess package. Therefore, they are best run on machines with several cores.
 
 # Step 1: AFM calculation
 
@@ -44,6 +44,13 @@ This saves the frequency shifts as a single xsf file. Though it is not neccessar
 # Step 2: (effective) isosurface calculation
 Now the isosurface has to be calculated. This workflow covers only the pure isosurface, in order to include the probe-particle deflections and the probe-tip interaction refer to the advanced example. The isosurface corresponds to a surface of constant electronic density, which translates (in the Tersoff-Hamann approximation) to a constant tunnel current. This is done in the script "extract_isosurface_height_map_parallel.py"
 ```
-python extract_isosurface_height_map_parallel.py CHG.xsf output.txt 0.00001
+python extract_isosurface_height_map_parallel.py CHG.xsf output_iso.txt 0.00001 -s 0.6
 ```
-output.txt is the name of the output file, the last value is the isovalue. Depending on the program used to generate and extract the density, it can have different units (for example charge/cellvolume, charge/A^3, charge/cell). In the case of charge/cell, the isovalue is typicall in the range of 10^-4 to 10^-6.
+output_iso.txt is the name of the output file, the third value is the isovalue. Depending on the program used to generate and extract the density, it can have different units (for example charge/cellvolume, charge/A^3, charge/cell). In the case of charge/cell, the isovalue is typicall in the range of 10^-4 to 10^-6. The option "-s" defines the start of the scan for the isosurface, given as fraction of the cell height (default 0.9). In principle this can be left out, the code can scan both upwards and downwards. However, sometimes there are artifacts in the density in the form of small areas of heightend or lowered density, especially near the atom cores. Therefore a start in the vacuum region is preferable.
+
+# Step 3: cc-AFM image calculation
+Finally by using the calculated frequency shifts and the isosurface, the cc-AFM image is calculated. This is done in the script "Afm_at_Isosurface.py".
+```
+python Afm_at_Isosurface.py Q-0.05K0.20/Amp1.00/df.xsf output_iso.txt cc-AFM_image.png
+```
+df.xsf contains the frequency shifts calculated in step 1. The name of the folder is dependent on your choice of parameters. output_iso.txt is the isosurface file calculated in step 2. cc-AFM_image.png is the output image. Additionally, the height profile is printed in the file cc-AFM_image_height.png
