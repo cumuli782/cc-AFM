@@ -1,3 +1,5 @@
+This workflow shows the general calculation of cc-AFM images. It results in a single cc-AFM image based on the pure isovalue. For a more refined calculation (including tip deflections) and the calculation of several images at once, refer to the advanced example.
+
 # Requirements
 
 In order to calculate cc-AFM images the electronic density (and if applicable the partial electronic density) of the system is needed. This density has to be in the xsf format and on a surface-cell grid: 
@@ -18,5 +20,6 @@ First, the 3D stack of constant height AFM images has to be calculated using the
 2) The cc-AFM images are sensitive to changes in z direction. Therefore a finer grid is recommended in z direction. Change ScanStep accordingly, for example ScanStep 0.1 0.1 0.01
 
 ## 1c) Doing the calculations
-
+For the force field calculation the usage of the full density model is assumed, the file names are assumed to be CHG_tip.xsf for the tip density and LOCPOT.xsf for the electrostatic potential. For other models, refer to the ppafm wiki. 
+Generate forcefields:
 
