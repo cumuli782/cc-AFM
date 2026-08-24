@@ -7,4 +7,9 @@ v2xsf CHG_sample -d -o CHG_sample.xsf
 v2xsf CHG_tip -d -o CHG_tip.xsf
 v2xsf LOCPOT -d -o LOCPOT.xsf
 ```
+With this the files have the proper format and scaling.
 
+# Step 1: AFM calculations
+
+## 1a) params.ini
+A full parameter file is present in the example directory. As discussed in the basic workflow, most of the parameters are set as in a regular constant height AFM calculation. In this case, the setup is chosen to emulate a CO molecule adsorbed on a silver tip. The parameters which have to be chosen specially for the cc-AFM calculation are the scan range and the scan resol
