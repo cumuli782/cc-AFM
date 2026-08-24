@@ -40,11 +40,13 @@ Now the effective charge iso surface has to be calculated. The effective isosurf
   1) The particle deflections
   2) The equilibrium distance between probe particle and tip
   3) The oscillation amplitude
+
 The probe-tip interaction is modeled as an exponential function, for which the decay constant has to be set. This is dependent on the tip and adsorbed molecule, and generally not known beforehand. It is therefore best to test several decay constants. Furthermore, the isovalue has to be set. It is again useful to consider several isovalues.
 In order to avoid repeating the reading of the files (which can take a considerable amount of time), a range of those parameters can be considered in a single call of the program:
 ```
 python extract_isosurface_height_map_parallel.py CHG_sample.xsf Test_calculation 0.1 -ppd Q-0.05K0.15 -R 3.0 -A 1.0 -dr "0 6 5" -ir "0.000002 0.00002 0.000002" -s 0.65
 ```
 The first three define the charge density file, the prefix for the output files, and the isovalue. However, the isovalue is overwritten by options later on.
+
 The option -ppd sets the directory where the particle deflections are stored. Those are called PPpos_x.xsf, PPpos_y.xsf and PPpos_z.xsf and are in the directory created by ppafm (directory name is dependent on parameter choice). The options -R defines the tip-probe equilibrium distance, and -A defines the oscillation amplitude. Both parameters have to be chosen to be the same as in params.ini. The parameters -dr and -ir define the different decay constants and isovalues for which the isosurface is computed. The syntax is similar to the python range function: The first value within the quotes is the starting point of the range, the second is the end point of the range (excluded), and the last value is the step size. E.g. with -dr "0 6 5" the decay constants of 0 and 5 are considered. Lastly the option -s defines the starting point of the scan, relative to the z-axis. The starting point should idealy be within the vacuum region.
 With the option -dr set, a subdirectory is created for each decay constant. Each directory contains the isosurfaces for each isovalue.
