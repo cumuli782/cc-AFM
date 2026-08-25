@@ -33,7 +33,7 @@ Lastly the frequency shifts have to be calculated and saved in the xsf format:
 ```
 ppafm-plot-results --df --save_df
 ```
-With this command the frequency shifts are outputted in the xsf format and as actual images. The images are not needed for the further calculations, but can be useful to check if something goes wrong in the calculation. Remove --df if no image output is wanted.
+With this command the frequency shifts are outputted in the xsf format (as df.xsf) and as actual images. The images are not needed for the further calculations, but can be useful to check if something goes wrong in the calculation. Remove --df if no image output is wanted.
 
 # Step 2: Generate the effective iso surfaces
 Now the effective charge iso surface has to be calculated. The effective isosurface differs from a regular charge isosurface, since it includes position changes due to the probe-particle deflections, potential decreases or increases in tunnel current due to the probe-tip interaction, and an averaging over the oscillation amplitude. For this, several parameters have to be known from the AFM calculation:
@@ -48,6 +48,13 @@ python extract_isosurface_height_map_parallel.py CHG_sample.xsf Test_calculation
 ```
 The first three define the charge density file, the prefix for the output files, and the isovalue. However, the isovalue is overwritten by options later on.
 
-The option -ppd sets the directory where the particle deflections are stored. Those are called PPpos_x.xsf, PPpos_y.xsf and PPpos_z.xsf and are in the directory created by ppafm (directory name is dependent on parameter choice). The options -R defines the tip-probe equilibrium distance, and -A defines the oscillation amplitude. Both parameters have to be chosen to be the same as in params.ini. The parameters -dr and -ir define the different decay constants and isovalues for which the isosurface is computed. The syntax is similar to the python range function: The first value within the quotes is the starting point of the range, the second is the end point of the range (excluded), and the last value is the step size. E.g. with -dr "0 6 5" the decay constants of 0 and 5 are considered. Lastly the option -s defines the starting point of the scan, relative to the z-axis. The starting point should idealy be within the vacuum region.
+The option -ppd sets the directory where the particle deflections are stored. Those are called PPpos_x.xsf, PPpos_y.xsf and PPpos_z.xsf and are in the directory created by ppafm (directory name is dependent on parameter choice). The options -R defines the tip-probe equilibrium distance, and -A defines the oscillation amplitude. Both parameters have to be chosen to be the same as in params.ini. The parameters -dr and -ir define the different decay constants and isovalues for which the isosurface is computed. The syntax is similar to the python range function: The first value within the quotes is the starting point of the range, the second is the end point of the range (excluded), and the last value is the step size. E.g. with -dr "0 6 5" the decay constants from 0 to 6 are considered, with steps of 5 inbetween, resulting in the two values of 0 and 5. Lastly the option -s defines the starting point of the scan, relative to the z-axis. The starting point should idealy be within the vacuum region.
 
-With the option -dr set, a subdirectory is created for each decay constant. Each directory contains the isosurfaces for each isovalue. The first line of those files indicate the number of x and y grid points, the second and third define the x and y vector of the cell. The other lines represent the isosurface in the xyz format. Additionally, 
+With the option -dr set, a subdirectory is created for each decay constant. Each directory contains the isosurfaces for each isovalue. The first line of those files indicate the number of x and y grid points, the second and third define the x and y vector of the cell. The other lines represent the isosurface in the xyz format. Additionally, the position of the probe particle at the effective isosurface is printed out. This is not needed for the following calculation, but can help interpreting the images.
+
+# Step 3: Calculation of cc-AFM images
+By combining the frequency shifts with the effective isosurfaces, the cc-AFM images can be calculated. While each isosurface is represented with a different file, the frequency shift file stays the same for all images. Therefore it is reasonable to load the frequency shifts once, and calculate the images for all isosurfaces in one swoop. 
+```
+python Afm_at_Isosurface.py Q-0.05K0.15/Amp1.0/df.xsf ./ dummy -ff -aat -sat
+```
+
