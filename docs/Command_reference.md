@@ -2,35 +2,6 @@
 
 ```
 positional arguments:
-  infile_afm            AFM frequency shift file at different heigts, produced with ppafm-plot_results --save_df
-  infile_height         Height profile file for a specific iso surface, generated with extract_isosurface_height_map.py
-  outfile               Name for the constant iso AFM image outfile
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --offset OFFSET, -o OFFSET
-                        constant offset in angstrom at which the constant iso AFM image will be calculated. If the constant height AFM images are adjusted to fit the charge density, this is not necessary. Can be useful to find the correct parameters for the AFM calculation.
-  --no_stm              supresses the output of the corresponding height profile (constant current STM image)
-  --print_effective_height, -peh
-                        saves height map used in the AFM image (can differ from image of the --no_stm flag due to the possibly different cells of AFM and STM calculation and due to interpolation)
-  --print_effective_index, -pei
-                        same as --print_effective_height, but outputs the used grid indices instead of the actual heights. Used mainly for errorshooting.
-  --no_freq_interpolation, -nfi
-                        disable frequency interpolation between heights. Used mainly for errorshooting.
-  --no_height_interpolation, -nhi
-                        disable height interpolation from height profile to AFM grid. Used mainly for errorshooting.
-  --full_folder, -ff    searches for all height files a folder (includes subdirectories). Folder is given by infile_height argument. Overwrites outfile
-  --afm_as_txt, -aat    prints the AFM image as a txt file with the format row column frequency_shift
-  --stm_as_txt, -sat    prints the STM image as a txt file with the format row column height. Works only if --no_stm is not set
-(.venv) (base) [krenzm@justhpc-login Python_skripts]$ emacs extract_isosurface_height_map_parallel.py
-(.venv) (base) [krenzm@justhpc-login Python_skripts]$ python extract_isosurface_height_map_parallel.py -h
-usage: extract_isosurface_height_map_parallel.py [-h] [--scan_start SCAN_START] [--pp_deflection_dir PP_DEFLECTION_DIR] [--offset OFFSET] [--tip_distance TIP_DISTANCE] [--b_decay B_DECAY] [--no_tip_flip_cutoff] [--Amp AMP] [--iso_range ISO_RANGE] [--offset_range OFFSET_RANGE]
-                                                 [--decay_range DECAY_RANGE]
-                                                 infile_chg outfile iso_value
-
-Extracts the height profile of an electron density isosurface. Includes the probe-particle deflections if provided
-
-positional arguments:
   infile_chg            Charge density in the xsf format
   outfile               Name of the height profile outfile
   iso_value             Iso value at which the height will be extracted
@@ -55,6 +26,31 @@ optional arguments:
   --offset_range OFFSET_RANGE, -or OFFSET_RANGE
                         range of offsets to be used. Given either with a , separated list (e.g 0.4, 0.5, etc.) or as a range with syntax "start stop stepsize". Overwrites offset.
   --decay_range DECAY_RANGE, -dr DECAY_RANGE
-
-
                         range of tip-pp decays to be used. Given either with a , separated list (e.g 0.05, 0.06, etc.) or as a range with syntax "start stop stepsize". Overwrites b_decay.
+```
+
+# Reference for Afm_at_Isosurface.py
+
+```
+positional arguments:
+  infile_afm            AFM frequency shift file at different heigts, produced with ppafm-plot_results --save_df
+  infile_height         Height profile file for a specific iso surface, generated with extract_isosurface_height_map.py
+  outfile               Name for the constant iso AFM image outfile
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --offset OFFSET, -o OFFSET
+                        constant offset in angstrom at which the constant iso AFM image will be calculated. If the constant height AFM images are adjusted to fit the charge density, this is not necessary. Can be useful to find the correct parameters for the AFM calculation.
+  --no_stm              supresses the output of the corresponding height profile (constant current STM image)
+  --print_effective_height, -peh
+                        saves height map used in the AFM image (can differ from image of the --no_stm flag due to the possibly different cells of AFM and STM calculation and due to interpolation)
+  --print_effective_index, -pei
+                        same as --print_effective_height, but outputs the used grid indices instead of the actual heights. Used mainly for errorshooting.
+  --no_freq_interpolation, -nfi
+                        disable frequency interpolation between heights. Used mainly for errorshooting.
+  --no_height_interpolation, -nhi
+                        disable height interpolation from height profile to AFM grid. Used mainly for errorshooting.
+  --full_folder, -ff    searches for all height files a folder (includes subdirectories). Folder is given by infile_height argument. Overwrites outfile
+  --afm_as_txt, -aat    prints the AFM image as a txt file with the format row column frequency_shift
+  --stm_as_txt, -sat    prints the STM image as a txt file with the format row column height. Works only if --no_stm is not set
+```
