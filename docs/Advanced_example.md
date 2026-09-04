@@ -57,7 +57,7 @@ With the option *-dr* set, a subdirectory is created for each decay constant. Ea
 # Step 3: Calculation of cc-AFM images
 By combining the frequency shifts with the effective isosurfaces, the cc-AFM images can be calculated. While each isosurface is represented with a different file, the frequency shift file stays the same for all images. Therefore it is reasonable to load the frequency shifts once, and calculate the images for all isosurfaces in one swoop. 
 ```
-python Afm_at_Isosurface.py Q-0.05K0.15/Amp1.0/df.xsf ./ dummy -ff -aat 
+python Afm_at_Isosurface.py Q-0.05K0.15/Amp1.00/df.xsf ./ dummy -ff -aat 
 ```
 The first argument is the frequency shift file, which is located in a directory created by ppafm (name dependent on parameter choice). Regulary the second and third argument would designate the isosurface input file and the output file. However, the option *-ff* (full folder) is specified. This option allows to process all isosurface files in a given directory (and its subdirectories). This directory is now specified with the input parameter. In this example, the isosurfaces are located in the folders ./decay_5.000000 and ./decay_0.000000. With the chosen directory being *./*, the isosurfaces in both folders will be found and processed. By designating the option *-ff* the output images are saved in their respective folder, and the names are automatically generated, which is why the argument for the output file becomes irrelevant. 
 
