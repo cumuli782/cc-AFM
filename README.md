@@ -5,7 +5,7 @@ This code allows for the generation of constant current atomic force mircroscopy
 
 # Installation
 
-The code consists of two python scripts and thus only requires the installation of some libraries (listed below), which can be installed via pip. A virtual environment for the installation is recommended. The code was tested with python 3.9.21.
+The code consists of two python scripts (located in [code](https://github.com/cumuli782/cc-AFM/tree/main/code)) and thus only requires the installation of some libraries (listed below), which can be installed via pip. A virtual environment for the installation is recommended. The code was tested with python 3.9.21.
 
 Set up environment (optional):
 ```
