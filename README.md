@@ -39,4 +39,4 @@ python Afm_at_Isosurface.py <Frequency_shifts.xsf> <height_profile> <output_file
 The whole workflow and a more avanced example are given in the [docs](https://github.com/cumuli782/cc-AFM/tree/main/docs).
 
 # Citation
-This code is free to use and free to modify. However, we appreaciate the citation of the paper, where this code has been introduced: **Density-Based Simulation of Constant-Current Atomic Force Microscopy Enables Quantitative non-planar Molecular Imaging** 
+This code is free to use and free to modify. However, we appreaciate the citation of the paper, where this code has been introduced: **Density-Based Simulation of Constant-Current Atomic Force Microscopy Enables Quantitative non-planar Molecular Imaging** (https://doi.org/10.1021/acsnano.6c07202)
